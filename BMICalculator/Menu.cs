@@ -57,7 +57,7 @@ internal class Menu
         Console.WriteLine("----------------------------------");
         foreach (var measurement in BMIManager.bMIMeasurements)
         {
-            Console.WriteLine($"Name: {measurement.Person.Surname}, {measurement.Person.Firstname} - Age: {measurement.Age} - BMI: {measurement.BMI}");
+            Console.WriteLine($"Name: {measurement.Surname}, {measurement.Firstname} - Age: {measurement.Age} - BMI: {measurement.BMI}");
         }
         Console.WriteLine("----------------------------------");
         Console.WriteLine("Press any key to go back to the Menu");

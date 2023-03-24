@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BMICalculator.Models;
 
-namespace BMICalculator
+namespace BMICalculator;
+
+internal interface IPerson
 {
-    internal interface Interfaces
-    {
-    }
+    public string Surname { get; set; }
+    public string Firstname { get; set; }
+    public DateOnly Birthday { get; set; }
+    public Gender Gender { get; set; }
 }

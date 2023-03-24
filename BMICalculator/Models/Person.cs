@@ -1,6 +1,6 @@
 ﻿namespace BMICalculator.Models;
 
-internal class Person
+internal class Person : IPerson
 {
     public string Surname { get; set; }
     public string Firstname { get; set; }

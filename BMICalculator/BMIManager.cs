@@ -53,7 +53,10 @@ internal class BMIManager
     {
         BMIMeasurement measurement = new BMIMeasurement { };
 
-        measurement.Person = person;
+        measurement.Surname = person.Surname;
+        measurement.Firstname = person.Firstname;
+        measurement.Gender = person.Gender;
+        measurement.Birthday = person.Birthday;
         measurement.Height = int.Parse(Helpers.ValidateNumber(Helpers.GetInput("Please enter your Height in Centimeters")));
         measurement.Weight = int.Parse(Helpers.ValidateNumber(Helpers.GetInput("Please enter your Weight in kilograms")));
         measurement.Date = DateTime.Now;
