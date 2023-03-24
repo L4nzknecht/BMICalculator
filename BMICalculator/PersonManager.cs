@@ -1,15 +1,16 @@
 ﻿using BMICalculator.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BMICalculator;
 
 internal class PersonManager
 {
-    public void CreatePerson()
+    internal static List<Person> persons = new List<Person> { };
+    internal void AddToPersons(Person person)
+    {
+        persons.Add(person);
+    }
+
+    internal Person CreatePerson()
     {
         Person person = new Person
         {
@@ -19,7 +20,8 @@ internal class PersonManager
             Gender = GetGender()
         };
 
-        Helpers.AddToPersons(person);
+        AddToPersons(person);
+        return person;
     }
     internal Gender GetGender()
     {
@@ -58,4 +60,6 @@ internal class PersonManager
 
         return Gender;
     }
+
+
 }

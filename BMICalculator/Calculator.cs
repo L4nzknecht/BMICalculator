@@ -1,22 +1,27 @@
 ﻿using BMICalculator.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BMICalculator
+namespace BMICalculator;
+
+internal class Calculator
 {
-    internal class Calculator
+    public Calculator() { }
+
+    public double CalculateBMI(BMIMeasurement measurement)
     {
-        public Calculator() { }
+        double height = measurement.Height;
 
-        public double CalculateBMI(BMIMeasurement measurement)
-        {
-            double height = measurement.height;
-
-            double BMI = measurement.weight / (height/100 * height/100);
-            return BMI;
-        }
+        double BMI = measurement.Weight / (height / 100 * height / 100);
+        return BMI;
     }
+    internal int CalculateAge(BMIMeasurement measurement)
+    {
+
+        int years = measurement.Date.Year - measurement.Person.Birthday.Year;
+
+        if ((measurement.Person.Birthday.Month > measurement.Date.Month) || (measurement.Person.Birthday.Month == measurement.Date.Month && measurement.Person.Birthday.Day > measurement.Date.Day))
+            years--;
+
+        return years;
+    }
+
 }

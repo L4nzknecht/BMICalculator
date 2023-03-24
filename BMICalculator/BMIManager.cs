@@ -1,91 +1,65 @@
 ﻿using BMICalculator.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace BMICalculator
+namespace BMICalculator;
+
+internal class BMIManager
 {
-    internal class BMIManager
+    private Calculator calc;
+    internal static BMIManager bMI = new BMIManager();
+
+    internal static List<BMIMeasurement> bMIMeasurements = new List<BMIMeasurement> { };
+    internal void AddToMeasurements(BMIMeasurement measurement)
     {
-        private Calculator calc;
+        BMIManager.bMIMeasurements.Add(measurement);
+    }
 
-        public BMIManager()
-        {
-            calc = new Calculator();
-        }
+    internal BMIManager()
+    {
+        calc = new Calculator();
+    }
 
-        public void Loop()
-        {
-            int choice = 0;
-            
-            do
-            {
-                choice = Menu.MenuMain();
-                Helpers.Clear();
-                switch (choice)
-                {
-                    case 1:
-                        Helpers.Info("BMI-Calculator\n");
+    internal void GetBMI()
+    {
+        Console.Clear();
 
-                        BMIMeasurement measurement = GetBMIMeasurement(GetPerson());
+        Helpers.Info("BMI-Calculator\n");
 
-                        measurement.BMI = calc.CalculateBMI(measurement);
-                        Helpers.AddToMeasurements(measurement);
-                        OutputBMI(measurement.BMI);
-                        
-                        break;
-                    case 2:
-                        Menu.PrintPersons();
-                        break;
-                    case 3:
-                        break;
-                    default:
-                        Helpers.Info($"unknown choice {choice}, please try again");
-                        break;
+        BMIMeasurement measurement = GetBMIMeasurement(GetPerson());
 
-                }
-                Helpers.InfoWait();
-                Helpers.Clear();
-            } while (choice != 3);
-            
-        }
+        measurement.BMI = calc.CalculateBMI(measurement);
+        AddToMeasurements(measurement);
+        OutputBMI(measurement.BMI);
+        Helpers.InfoWait("Please press any Key to return to Menu");
+        Console.Clear();
+    }
+    private void OutputBMI(double bmi)
+    {
+        Helpers.Info(
+            $"\n" +
+            $"Your BMI: {bmi:0.##}\n" +
+            $"\n" +
+            $"BMI < 18,5         - Underweight\n" +
+            $"BMI 18,5 to 24,9   - Normal\n" +
+            $"BMI 25 to 29,9     - Overweight\n" +
+            $"BMI 30 and up      - Adipositas");
+    }
+    internal Person GetPerson()
+    {
+        PersonManager personManager = new PersonManager();
+        Person person = personManager.CreatePerson();
+        return person;
+    }
+    internal BMIMeasurement GetBMIMeasurement(Person person)
+    {
+        BMIMeasurement measurement = new BMIMeasurement { };
 
-        private void OutputBMI(double bmi)
-        {
-            Helpers.Info(
-                $"\n" +
-                $"Your BMI: {bmi:0.##}\n" +
-                $"\n" +
-                $"BMI < 18,5         - Underweight\n" +
-                $"BMI 18,5 to 24,9   - Normal\n" +
-                $"BMI 25 to 29,9     - Overweight\n" +
-                $"BMI 30 and up      - Adipositas");
-        }
-        internal static Person GetPerson()
-        {
-            Person person = new Person { };
+        measurement.Person = person;
+        measurement.Height = int.Parse(Helpers.ValidateNumber(Helpers.GetInput("Please enter your Height in Centimeters")));
+        measurement.Weight = int.Parse(Helpers.ValidateNumber(Helpers.GetInput("Please enter your Weight in kilograms")));
+        measurement.Date = DateTime.Now;
+        measurement.Age = calc.CalculateAge(measurement);
 
-            person.Surname = Helpers.GetInput("Please enter your Surname");
-            person.Firstname = Helpers.GetInput("Please enter your Firstname");
-            person.Birthday = Helpers.GetDateOnly("Please enter your bithday");
-            person.Gender = Helpers.GetGender();
-            Helpers.AddToPersons(person);
-            return person;
-        }
-        internal static BMIMeasurement GetBMIMeasurement(Person person)
-        {
-            BMIMeasurement measurement = new BMIMeasurement { };
-
-            measurement.Person = person;
-            measurement.height = int.Parse(Helpers.ValidateNumber(Helpers.GetInput("Please enter your height in Centimeters")));
-            measurement.weight = int.Parse(Helpers.ValidateNumber(Helpers.GetInput("Please enter your weight in kilograms")));
-            measurement.Date = DateTime.Now;
-            return measurement;
-        }
+        Console.Clear();
+        return measurement;
     }
 }

@@ -1,44 +1,52 @@
-﻿using BMICalculator.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BMICalculator;
+﻿namespace BMICalculator;
 
 internal class Menu
 {
-    internal static int MenuMain()
+    internal static void MenuMain()
     {
-        int choice = 0;
-        Helpers.Info("BMI-Calculator");
+        int choice;
+        do
+        {
+            Helpers.Info("BMI-Calculator");
 
-        var varchoice = Helpers.GetInput(
-            "Please choose one of the following\n" +
-            "1 - BMI Calculator\n" +
-            "2 - Recent Calculations\n" +
-            "3 - End");
+            var varchoice = Helpers.GetInput(
+                "Please choose one of the following\n" +
+                "1 - BMI Calculator\n" +
+                "2 - Recent Calculations\n" +
+                "3 - End");
 
-        varchoice = varchoice.ToLower();
-        if (varchoice.Contains("c") || varchoice.Contains("b"))
-        {
-            varchoice = "1";
-        }
-        if (varchoice.Contains("r"))
-        {
-            varchoice = "2";
-        }
-        if (varchoice.Contains("e"))
-        {
-            varchoice = "3";
-        }
-        choice = int.Parse(Helpers.ValidateNumber(varchoice));
-        return choice;
+            varchoice = varchoice.ToLower();
+            if (varchoice.Contains("c") || varchoice.Contains("b"))
+            {
+                varchoice = "1";
+            }
+            if (varchoice.Contains("r"))
+            {
+                varchoice = "2";
+            }
+            if (varchoice.Contains("e") || varchoice.Contains("3"))
+            {
+                varchoice = "99";
+            }
+            choice = int.Parse(Helpers.ValidateNumber(varchoice));
+            switch (choice)
+            {
+                case 1:
+                    BMIManager.bMI.GetBMI();
+                    break;
+                case 2:
+                    PrintPersons();
+                    break;
+                case 99:
+                    break;
+                default:
+                    Helpers.Info($"unknown choice {choice}, please try again");
+                    break;
+            }
+            Helpers.InfoWait();
+            Console.Clear();
+        } while (choice != 3);
     }
-
-
 
     internal static void PrintPersons()
     {
@@ -47,9 +55,9 @@ internal class Menu
         Console.Clear();
         Console.WriteLine("Games History");
         Console.WriteLine("----------------------------------");
-        foreach (var measurement in Helpers.bMIMeasurements)
+        foreach (var measurement in BMIManager.bMIMeasurements)
         {
-            Console.WriteLine($"Name: {measurement.Person.Surname}, {measurement.Person.Firstname} - Age: {Helpers.CalculateAge(measurement)} - BMI: {measurement.BMI}");
+            Console.WriteLine($"Name: {measurement.Person.Surname}, {measurement.Person.Firstname} - Age: {measurement.Age} - BMI: {measurement.BMI}");
         }
         Console.WriteLine("----------------------------------");
         Console.WriteLine("Press any key to go back to the Menu");
