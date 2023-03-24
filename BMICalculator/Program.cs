@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Manager manager = new Manager();
+            BMIManager manager = new BMIManager();
             manager.Loop();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMICalculator.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,12 @@ namespace BMICalculator
     {
         public Calculator() { }
 
-        public double CalculateBMI(double height, double weight)
+        public double CalculateBMI(BMIMeasurement measurement)
         {
-            return weight / (height * height);
+            double height = measurement.height;
+
+            double BMI = measurement.weight / (height/100 * height/100);
+            return BMI;
         }
     }
 }
