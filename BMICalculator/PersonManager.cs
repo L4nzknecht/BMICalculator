@@ -14,7 +14,7 @@ internal class PersonManager
     {
         Person person = new Person
         {
-            Surname = Menu.GetInput("Please enter your Surname"),
+            Lastname = Menu.GetInput("Please enter your Lastname"),
             Firstname = Menu.GetInput("Please enter your Firstname"),
             Birthday = Menu.GetDateOnly("Please enter your Birthday"),
             Gender = GetGender()

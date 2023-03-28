@@ -7,7 +7,10 @@ internal class BMIManager
     private Calculator calc;
     internal static BMIManager bMI = new BMIManager();
 
-    internal static List<BMIMeasurement> bMIMeasurements = new List<BMIMeasurement> { };
+    internal static List<BMIMeasurement> bMIMeasurements = new List<BMIMeasurement> 
+    { 
+    //    new BMIMeasurement(Lastname = "Platl", Fistname = "Henri", Birthday = 02.05.1993, Gender = Gender.male, Height = 180, Weight = 100, Date = DateTime.Now.AddDays(-1), Age = 29, BMI 
+    };
     internal void AddToMeasurements(BMIMeasurement measurement)
     {
         BMIManager.bMIMeasurements.Add(measurement);
@@ -27,21 +30,23 @@ internal class BMIManager
         BMIMeasurement measurement = GetBMIMeasurement(GetPerson());
 
         measurement.BMI = calc.CalculateBMI(measurement);
+        measurement.Designation = GetDesignation(measurement.BMI);
         AddToMeasurements(measurement);
-        OutputBMI(measurement.BMI);
+
+        Menu.OutputBMI(measurement);
         Menu.InfoWait("Please press any Key to return to Menu");
         Console.Clear();
     }
-    private void OutputBMI(double bmi)
+    internal BMIDesignation GetDesignation(double bMI)
     {
-        Menu.Info(
-            $"\n" +
-            $"Your BMI: {bmi:0.##}\n" +
-            $"\n" +
-            $"BMI < 18,5         - Underweight\n" +
-            $"BMI 18,5 to 24,9   - Normal\n" +
-            $"BMI 25 to 29,9     - Overweight\n" +
-            $"BMI 30 and up      - Adipositas");
+        BMIDesignation designation = BMIDesignation.normalweight;
+        if (bMI >= 40) { designation = BMIDesignation.AdipositasIII; }
+        if (40 > bMI && bMI >= 35) { designation = BMIDesignation.AdipositasII; }
+        if (35 > bMI && bMI >= 30) { designation = BMIDesignation.AdipositasI; }
+        if (30 > bMI && bMI >= 25) { designation = BMIDesignation.overweight; }
+        if (25 > bMI && bMI >= 18.5) { designation = BMIDesignation.normalweight; }
+        if (18.8 > bMI) { designation = BMIDesignation.underweight; }
+        return designation;
     }
     internal Person GetPerson()
     {
@@ -53,7 +58,7 @@ internal class BMIManager
     {
         BMIMeasurement measurement = new BMIMeasurement { };
 
-        measurement.Surname = person.Surname;
+        measurement.Lastname = person.Lastname;
         measurement.Firstname = person.Firstname;
         measurement.Gender = person.Gender;
         measurement.Birthday = person.Birthday;

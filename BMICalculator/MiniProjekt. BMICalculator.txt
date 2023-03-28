@@ -13,4 +13,9 @@ Reflexion // Vorgehensweise, Erweiterungen
 	Es sollen vergangene Messungen als Liste Ausgegeben werden können.
 
 2. Modellierung
-	Menu
+	Menu			- Kontrolliert Ein- und Ausgaben
+	Calculator		- Berechnet notwendige Werte
+	BMIManager		- Kontrolliert die ListofBMIMeasurements
+	PersonManager	- Kontrolliert die ListofPersons
+	Interfaces		- erschafft notwendige Interfaces
+	Checkers		- Kontrolliert die Listen und Gibt Warnungen raus

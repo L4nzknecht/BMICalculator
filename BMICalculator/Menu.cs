@@ -1,4 +1,7 @@
-﻿namespace BMICalculator;
+﻿using BMICalculator.Models;
+using System.Diagnostics.Metrics;
+
+namespace BMICalculator;
 
 internal class Menu
 {
@@ -13,7 +16,8 @@ internal class Menu
                 "Please choose one of the following\n" +
                 "1 - BMI Calculator\n" +
                 "2 - Recent Calculations\n" +
-                "3 - End");
+                "3 - Warnings" +
+                "99 - End");
 
             varchoice = varchoice.ToLower();
             if (varchoice.Contains("c") || varchoice.Contains("b"))
@@ -24,7 +28,11 @@ internal class Menu
             {
                 varchoice = "2";
             }
-            if (varchoice.Contains("e") || varchoice.Contains("3"))
+            if (varchoice.Contains("w"))
+            {
+                varchoice = "3";
+            }
+            if (varchoice.Contains("e") || varchoice.Contains("99"))
             {
                 varchoice = "99";
             }
@@ -35,7 +43,10 @@ internal class Menu
                     BMIManager.bMI.GetBMI();
                     break;
                 case 2:
-                    PrintPersons();
+                    PrintListOfMeasurements(BMIManager.bMIMeasurements);
+                    break;
+                case 3:
+                    Checkers.BMICheck();
                     break;
                 case 99:
                     break;
@@ -46,20 +57,31 @@ internal class Menu
             Console.Clear();
         } while (choice != 99);
     }
-    internal static void PrintPersons()
+    internal static void PrintListOfMeasurements(List<BMIMeasurement> measurements)
     {
         Console.Clear();
         Console.WriteLine("List of old BMI Measurements");
         Console.WriteLine("----------------------------------");
-        foreach (var measurement in BMIManager.bMIMeasurements)
+        foreach (var measurement in measurements)
         {
-            Console.WriteLine($"Name: {measurement.Surname}, {measurement.Firstname} - Age: {measurement.Age} - BMI: {measurement.BMI}");
+            Console.WriteLine($"Name: {measurement.Lastname}, " +
+                $"{measurement.Firstname} - " +
+                $"Age: {measurement.Age} - " +
+                $"BMI: {measurement.BMI} - " +
+                $"Designation: {measurement.Designation}");
         }
         Console.WriteLine("----------------------------------");
         Console.WriteLine("Press any key to go back to the Menu");
         Console.ReadLine();
     }
-
+    internal static void OutputBMI(BMIMeasurement measurement)
+    {
+        Console.WriteLine($"Name: {measurement.Lastname}, " +
+            $"{measurement.Firstname} - " +
+            $"Age: {measurement.Age} - " +
+            $"BMI: {measurement.BMI} - " +
+            $"Designation: {measurement.Designation}");
+    }
     internal static void Info(string message)
     {
         Console.WriteLine(message);
