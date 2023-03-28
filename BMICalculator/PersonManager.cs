@@ -14,9 +14,9 @@ internal class PersonManager
     {
         Person person = new Person
         {
-            Surname = Helpers.GetInput("Please enter your Surname"),
-            Firstname = Helpers.GetInput("Please enter your Firstname"),
-            Birthday = Helpers.GetDateOnly("Please enter your Birthday"),
+            Surname = Menu.GetInput("Please enter your Surname"),
+            Firstname = Menu.GetInput("Please enter your Firstname"),
+            Birthday = Menu.GetDateOnly("Please enter your Birthday"),
             Gender = GetGender()
         };
 
@@ -31,7 +31,7 @@ internal class PersonManager
         {
             Console.Clear();
             Console.WriteLine("" +
-                "Please choose a difficulty\n" +
+                "Please choose a gender\n" +
                 "m - male\n" +
                 "f - female\n" +
                 "o - other\n");

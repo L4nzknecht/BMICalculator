@@ -7,9 +7,9 @@ internal class Menu
         int choice;
         do
         {
-            Helpers.Info("BMI-Calculator");
+            Menu.Info("BMI-Calculator");
 
-            var varchoice = Helpers.GetInput(
+            var varchoice = Menu.GetInput(
                 "Please choose one of the following\n" +
                 "1 - BMI Calculator\n" +
                 "2 - Recent Calculations\n" +
@@ -28,7 +28,7 @@ internal class Menu
             {
                 varchoice = "99";
             }
-            choice = int.Parse(Helpers.ValidateNumber(varchoice));
+            choice = int.Parse(Menu.ValidateNumber(varchoice));
             switch (choice)
             {
                 case 1:
@@ -40,20 +40,16 @@ internal class Menu
                 case 99:
                     break;
                 default:
-                    Helpers.Info($"unknown choice {choice}, please try again");
+                    Menu.Info($"unknown choice {choice}, please try again");
                     break;
             }
-            Helpers.InfoWait();
             Console.Clear();
-        } while (choice != 3);
+        } while (choice != 99);
     }
-
     internal static void PrintPersons()
     {
-        //var gamesToPrint = games.Where(x => x.Type == GameType.Division).OrderByDescending(x => x.Score);
-
         Console.Clear();
-        Console.WriteLine("Games History");
+        Console.WriteLine("List of old BMI Measurements");
         Console.WriteLine("----------------------------------");
         foreach (var measurement in BMIManager.bMIMeasurements)
         {
@@ -62,5 +58,50 @@ internal class Menu
         Console.WriteLine("----------------------------------");
         Console.WriteLine("Press any key to go back to the Menu");
         Console.ReadLine();
+    }
+
+    internal static void Info(string message)
+    {
+        Console.WriteLine(message);
+    }
+    internal static void InfoWait(string message)
+    {
+        Info(message);
+        Console.ReadKey();
+    }
+    internal static void InfoWait()
+    {
+        Console.ReadKey();
+    }
+    internal static string GetInput(string message)
+    {
+        Info(message);
+        var input = Console.ReadLine();
+        while (input == null)
+        {
+            Info("Input invalid, try again");
+            input = Console.ReadLine();
+        }
+        return input;
+    }
+    internal static string ValidateNumber(string answer)
+    {
+        while (string.IsNullOrEmpty(answer) || !Int32.TryParse(answer, out _))
+        {
+            Console.WriteLine("Answer needs to be an Integer. Please try again.");
+            answer = Console.ReadLine();
+        }
+        return answer;
+    }
+    internal static DateOnly GetDateOnly(string message)
+    {
+        Console.WriteLine($"{message}");
+        var dateOnly = new DateOnly();
+        while (!DateOnly.TryParse(Console.ReadLine(), out dateOnly))
+        {
+            Console.WriteLine("Please enter the date as yyyy/MM/dd");
+        }
+        Console.Clear();
+        return dateOnly;
     }
 }

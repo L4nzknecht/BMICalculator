@@ -22,19 +22,19 @@ internal class BMIManager
     {
         Console.Clear();
 
-        Helpers.Info("BMI-Calculator\n");
+        Menu.Info("BMI-Calculator\n");
 
         BMIMeasurement measurement = GetBMIMeasurement(GetPerson());
 
         measurement.BMI = calc.CalculateBMI(measurement);
         AddToMeasurements(measurement);
         OutputBMI(measurement.BMI);
-        Helpers.InfoWait("Please press any Key to return to Menu");
+        Menu.InfoWait("Please press any Key to return to Menu");
         Console.Clear();
     }
     private void OutputBMI(double bmi)
     {
-        Helpers.Info(
+        Menu.Info(
             $"\n" +
             $"Your BMI: {bmi:0.##}\n" +
             $"\n" +
@@ -57,8 +57,8 @@ internal class BMIManager
         measurement.Firstname = person.Firstname;
         measurement.Gender = person.Gender;
         measurement.Birthday = person.Birthday;
-        measurement.Height = int.Parse(Helpers.ValidateNumber(Helpers.GetInput("Please enter your Height in Centimeters")));
-        measurement.Weight = int.Parse(Helpers.ValidateNumber(Helpers.GetInput("Please enter your Weight in kilograms")));
+        measurement.Height = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your Height in Centimeters")));
+        measurement.Weight = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your Weight in kilograms")));
         measurement.Date = DateTime.Now;
         measurement.Age = calc.CalculateAge(measurement);
 

@@ -3,10 +3,14 @@ Projektschritte beachten:
 Analyse // Anforderungen beschreiben  
 Modellierung // Klassendiagram
 Realisierung
-QM: Testen //
+QM: Testen // Wie ist getestet worden
 Reflexion // Vorgehensweise, Erweiterungen
 
 -Testen bzw. QM Abnahme bzgl. der Anforderungen  durch eine Partnerin bzw. Partner
 
 1. Analyse
-	Es geht darum eine Konsolen-App zu realisieren, in welcher Personen Messungen für eine BMI Berechnung Eingeben können
+	Es geht darum eine Konsolen-App zu realisieren, in welcher Personen Messungen für eine BMI Berechnung Eingeben können.
+	Es sollen vergangene Messungen als Liste Ausgegeben werden können.
+
+2. Modellierung
+	Menu
