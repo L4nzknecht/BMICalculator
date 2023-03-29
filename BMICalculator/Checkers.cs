@@ -14,7 +14,7 @@ internal class Checkers
     }
     private static List<BMIMeasurement> ListofBMIMeasurements(BMIDesignation designation)
     {
-        var measurementsToPrint = BMIManager.bMIMeasurements.Where(x => x.Designation == designation);
+        var measurementsToPrint = BMIManager.bMIMeasurements.Where(x => x.Designation == designation).ToList<BMIMeasurement>();
 
         return (List<BMIMeasurement>)measurementsToPrint;
     }

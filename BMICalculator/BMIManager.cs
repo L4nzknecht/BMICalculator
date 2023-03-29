@@ -4,18 +4,38 @@ namespace BMICalculator;
 
 internal class BMIManager
 {
-    private Calculator calc;
+    private static Calculator calc;
     internal static BMIManager bMI = new BMIManager();
 
-    internal static List<BMIMeasurement> bMIMeasurements = new List<BMIMeasurement> 
-    { 
-    //    new BMIMeasurement(Lastname = "Platl", Fistname = "Henri", Birthday = 02.05.1993, Gender = Gender.male, Height = 180, Weight = 100, Date = DateTime.Now.AddDays(-1), Age = 29, BMI 
-    };
+    internal static List<BMIMeasurement> bMIMeasurements = new List<BMIMeasurement> { };
     internal void AddToMeasurements(BMIMeasurement measurement)
     {
-        BMIManager.bMIMeasurements.Add(measurement);
+        bMIMeasurements.Add(measurement);
     }
+    internal static void GenerateMeasurement()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            Random rnd = new Random();
+            BMIMeasurement measurement = new BMIMeasurement { };
 
+            measurement.Lastname = Path.GetRandomFileName().Replace(".", "").Substring(0, 8);
+            measurement.Firstname = Path.GetRandomFileName().Replace(".", "").Substring(0, 8);
+            measurement.Birthday = DateOnly.FromDateTime(
+                DateTime.Now.AddYears(rnd.Next(-100, -15))
+                            .AddMonths(rnd.Next(-11, 0))
+                            .AddDays(rnd.Next(-28, 0)));
+            measurement.Gender = (Gender)rnd.Next(Enum.GetNames(typeof(Gender)).Length);
+            measurement.Height = 100 + (int)rnd.Next(0, 110);
+            measurement.Weight = 80 + (int)rnd.Next(-40, 40);
+            measurement.Date = DateTime.Now.AddDays(rnd.Next(-180, 0));
+            measurement.Age = calc.CalculateAge(measurement);
+            measurement.BMI = calc.CalculateBMI(measurement);
+            measurement.Designation = bMI.GetDesignation(measurement.BMI);
+
+            bMIMeasurements.Add(measurement); 
+        }
+    }
     internal BMIManager()
     {
         calc = new Calculator();

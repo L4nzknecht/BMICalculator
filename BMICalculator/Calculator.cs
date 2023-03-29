@@ -6,11 +6,12 @@ internal class Calculator
 {
     public Calculator() { }
 
-    public double CalculateBMI(BMIMeasurement measurement)
+    internal double CalculateBMI(BMIMeasurement measurement)
     {
         double height = measurement.Height;
 
         double BMI = measurement.Weight / (height / 100 * height / 100);
+        BMI = Math.Round(BMI, 2);
         return BMI;
     }
     internal int CalculateAge(BMIMeasurement measurement)

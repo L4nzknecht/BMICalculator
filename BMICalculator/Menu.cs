@@ -16,7 +16,7 @@ internal class Menu
                 "Please choose one of the following\n" +
                 "1 - BMI Calculator\n" +
                 "2 - Recent Calculations\n" +
-                "3 - Warnings" +
+                "3 - Warnings\n" +
                 "99 - End");
 
             varchoice = varchoice.ToLower();
@@ -59,16 +59,13 @@ internal class Menu
     }
     internal static void PrintListOfMeasurements(List<BMIMeasurement> measurements)
     {
+        var LoM = measurements.OrderByDescending(x => x.Designation);
         Console.Clear();
         Console.WriteLine("List of old BMI Measurements");
         Console.WriteLine("----------------------------------");
-        foreach (var measurement in measurements)
+        foreach (var measurement in LoM)
         {
-            Console.WriteLine($"Name: {measurement.Lastname}, " +
-                $"{measurement.Firstname} - " +
-                $"Age: {measurement.Age} - " +
-                $"BMI: {measurement.BMI} - " +
-                $"Designation: {measurement.Designation}");
+            OutputBMI(measurement);
         }
         Console.WriteLine("----------------------------------");
         Console.WriteLine("Press any key to go back to the Menu");
@@ -76,9 +73,11 @@ internal class Menu
     }
     internal static void OutputBMI(BMIMeasurement measurement)
     {
-        Console.WriteLine($"Name: {measurement.Lastname}, " +
-            $"{measurement.Firstname} - " +
+        Console.WriteLine($"" +
+            $"Name: {measurement.Lastname}, {measurement.Firstname} - " +
             $"Age: {measurement.Age} - " +
+            $"Height: {measurement.Height} cm - " +
+            $"Weigt: {measurement.Weight} kg - " +
             $"BMI: {measurement.BMI} - " +
             $"Designation: {measurement.Designation}");
     }
