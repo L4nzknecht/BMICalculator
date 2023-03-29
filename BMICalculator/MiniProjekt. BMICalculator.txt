@@ -19,3 +19,12 @@ Reflexion // Vorgehensweise, Erweiterungen
 	PersonManager	- Kontrolliert die ListofPersons
 	Interfaces		- erschafft notwendige Interfaces
 	Checkers		- Kontrolliert die Listen und Gibt Warnungen raus
+
+3. Realisierung
+
+4. Testen
+	Louis Tendler hat mein Projekt kontrolliert, und einige Ausgabefehler gefunden. 
+	Die Eingabe- und Ausgabe des Programmes wurde überprüft, und durch Eingabe von Messungen.
+
+5. Reflexion
+	Im weiteren wird eine Liste von Messungen vorher autogeneriert, um die Ausgabe testen zu können. Desweiteren sollen die checker automatisiert werden udn die nach bestimmten Eigenschaften gesucht/sortiert werden können.
