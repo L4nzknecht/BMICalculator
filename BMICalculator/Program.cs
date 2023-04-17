@@ -4,7 +4,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        BMIManager.GenerateMeasurement();
+        Generator.GenerateBMIMeasurements();
         Menu.MenuMain();
     }
 }

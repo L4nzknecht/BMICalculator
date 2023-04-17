@@ -59,9 +59,10 @@ internal class Menu
     }
     internal static void PrintListOfMeasurements(List<BMIMeasurement> measurements)
     {
-        var LoM = measurements.OrderByDescending(x => x.Designation);
+        var LoM = measurements.OrderByDescending(x => x.Date);
         Console.Clear();
         Console.WriteLine("List of old BMI Measurements");
+        Console.WriteLine("Ordered by Date");
         Console.WriteLine("----------------------------------");
         foreach (var measurement in LoM)
         {
@@ -74,6 +75,7 @@ internal class Menu
     internal static void OutputBMI(BMIMeasurement measurement)
     {
         Console.WriteLine($"" +
+            $"Date: {measurement.Date.ToString("dd/MM/yyyy")} - " +
             $"Name: {measurement.Lastname}, {measurement.Firstname} - " +
             $"Age: {measurement.Age} - " +
             $"Height: {measurement.Height} cm - " +
