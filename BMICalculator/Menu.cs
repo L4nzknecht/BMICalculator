@@ -1,4 +1,5 @@
-﻿using BMICalculator.Models;
+﻿using BMICalculator.Manager;
+using BMICalculator.Models;
 using System.Diagnostics.Metrics;
 
 namespace BMICalculator;
@@ -14,9 +15,9 @@ internal class Menu
 
             var varchoice = Menu.GetInput(
                 "Please choose one of the following\n" +
-                "1 - BMI Calculator\n" +
+                "1 - Enter OutputMeasurement\n" +
                 "2 - Recent Calculations\n" +
-                "3 - ListOfWarnings\n" +
+                "3 - listOfWarnings\n" +
                 "99 - End");
 
             varchoice = varchoice.ToLower();
@@ -40,13 +41,13 @@ internal class Menu
             switch (choice)
             {
                 case 1:
-                    MeasurementManager.bMI.GetBMI();
+                    MeasurementManager.GetMeasurement();
                     break;
                 case 2:
-                    PrintListOfMeasurements(MeasurementManager.bMIMeasurements);
+                    PrintListOfMeasurements(MeasurementManager.listOfMeasurements, "all warnings");
                     break;
                 case 3:
-                    MeasurementCheckers.BMICheck();
+                    PrintListOfMeasurements(WarningManager.listOfWarnings, "warnings");
                     break;
                 case 99:
                     break;
@@ -57,25 +58,41 @@ internal class Menu
             Console.Clear();
         } while (choice != 99);
     }
-    internal static void PrintListOfMeasurements(List<Measurement> measurements)
+    internal static void PrintListOfMeasurements(List<Measurement> measurements, string message)
     {
         var LoM = measurements.OrderByDescending(x => x.Date);
         Console.Clear();
-        Console.WriteLine("List of old BMI Measurements");
+        Console.WriteLine($"List of {message}");
         Console.WriteLine("Ordered by Date");
         Console.WriteLine("----------------------------------");
         foreach (var measurement in LoM)
         {
-            OutputBMI(measurement);
+            Menu.OutputMeasurement(measurement);
         }
         Console.WriteLine("----------------------------------");
         Console.WriteLine("Press any key to go back to the Menu");
         Console.ReadLine();
     }
-    internal static void OutputBMI(Measurement measurement)
+    internal static void PrintListOfMeasurements(List<Warning> warnings, string message)
+    {
+        var LoW = warnings.OrderByDescending(x => x.measurement.Date);
+        Console.Clear();
+        Console.WriteLine($"List of {message}");
+        Console.WriteLine("Ordered by Date");
+        Console.WriteLine("----------------------------------");
+        foreach (var warning in LoW)
+        {
+            OutputMeasurement(warning.measurement);
+            Console.WriteLine($"   Warning: {warning.Message}");
+        }
+        Console.WriteLine("----------------------------------");
+        Console.WriteLine("Press any key to go back to the Menu");
+        Console.ReadLine();
+    }
+    internal static void OutputMeasurement(Measurement measurement)
     {
         Console.WriteLine($"" +
-            $"Date: {measurement.Date.ToString("dd/MM/yyyy")} - " +
+            $"Date: {measurement.Date:dd/MM/yyyy} - " +
             $"Name: {measurement.Person.Lastname}, {measurement.Person.Firstname} - " +
             $"Age: {measurement.Age} - " +
             $"Height: {measurement.Height} cm - " +
@@ -119,7 +136,8 @@ internal class Menu
     internal static DateOnly GetDateOnly(string message)
     {
         Console.WriteLine($"{message}");
-        var dateOnly = new DateOnly();
+
+        DateOnly dateOnly;
         while (!DateOnly.TryParse(Console.ReadLine(), out dateOnly))
         {
             Console.WriteLine("Please enter the date as yyyy/MM/dd");

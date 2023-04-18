@@ -1,32 +1,30 @@
 ﻿using BMICalculator.Interfaces;
 using BMICalculator.Models;
 
-namespace BMICalculator;
+namespace BMICalculator.Manager;
 
 internal class PersonManager
 {
-    internal static List<Person> persons = new List<Person> { };
-    internal void AddToPersons(Person person)
+    internal static List<Person> listOfPersons = new() { };
+    internal static void AddToPersons(Person person)
     {
-        persons.Add(person);
+        listOfPersons.Add(person);
     }
 
 
 
-    internal Person CreatePerson()
+    internal static Person CreatePerson()
     {
-        Person person = new Person
+        Person person = new()
         {
             Lastname = Menu.GetInput("Please enter your Lastname"),
             Firstname = Menu.GetInput("Please enter your Firstname"),
             Birthday = Menu.GetDateOnly("Please enter your Birthday"),
             Gender = GetGender()
         };
-
-        AddToPersons(person);
         return person;
     }
-    internal Gender GetGender()
+    private static Gender GetGender()
     {
         bool chosen = false;
         Gender Gender = Gender.other;

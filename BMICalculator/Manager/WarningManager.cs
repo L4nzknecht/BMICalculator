@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BMICalculator;
+namespace BMICalculator.Manager;
 
 internal class WarningManager
 {
-    internal static List<Warning> ListOfWarnings = new List<Warning>();
+    internal static List<Warning> listOfWarnings = new();
 
     internal static void Add(Warning warning)
     {
-        ListOfWarnings.Add(warning);
+        listOfWarnings.Add(warning);
     }
+
+
 }
