@@ -1,6 +1,6 @@
 ﻿using BMICalculator.Models;
 
-namespace BMICalculator;
+namespace BMICalculator.Interfaces;
 
 internal interface IPerson
 {
@@ -8,4 +8,10 @@ internal interface IPerson
     public string Firstname { get; set; }
     public DateOnly Birthday { get; set; }
     public Gender Gender { get; set; }
+}
+internal enum Gender
+{
+    male,
+    female,
+    other
 }

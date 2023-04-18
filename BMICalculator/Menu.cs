@@ -16,7 +16,7 @@ internal class Menu
                 "Please choose one of the following\n" +
                 "1 - BMI Calculator\n" +
                 "2 - Recent Calculations\n" +
-                "3 - Warnings\n" +
+                "3 - ListOfWarnings\n" +
                 "99 - End");
 
             varchoice = varchoice.ToLower();
@@ -40,13 +40,13 @@ internal class Menu
             switch (choice)
             {
                 case 1:
-                    BMIManager.bMI.GetBMI();
+                    MeasurementManager.bMI.GetBMI();
                     break;
                 case 2:
-                    PrintListOfMeasurements(BMIManager.bMIMeasurements);
+                    PrintListOfMeasurements(MeasurementManager.bMIMeasurements);
                     break;
                 case 3:
-                    Checkers.BMICheck();
+                    MeasurementCheckers.BMICheck();
                     break;
                 case 99:
                     break;
@@ -57,7 +57,7 @@ internal class Menu
             Console.Clear();
         } while (choice != 99);
     }
-    internal static void PrintListOfMeasurements(List<BMIMeasurement> measurements)
+    internal static void PrintListOfMeasurements(List<Measurement> measurements)
     {
         var LoM = measurements.OrderByDescending(x => x.Date);
         Console.Clear();
@@ -72,11 +72,11 @@ internal class Menu
         Console.WriteLine("Press any key to go back to the Menu");
         Console.ReadLine();
     }
-    internal static void OutputBMI(BMIMeasurement measurement)
+    internal static void OutputBMI(Measurement measurement)
     {
         Console.WriteLine($"" +
             $"Date: {measurement.Date.ToString("dd/MM/yyyy")} - " +
-            $"Name: {measurement.Lastname}, {measurement.Firstname} - " +
+            $"Name: {measurement.Person.Lastname}, {measurement.Person.Firstname} - " +
             $"Age: {measurement.Age} - " +
             $"Height: {measurement.Height} cm - " +
             $"Weigt: {measurement.Weight} kg - " +

@@ -1,4 +1,6 @@
-﻿namespace BMICalculator.Models;
+﻿using BMICalculator.Interfaces;
+
+namespace BMICalculator.Models;
 
 internal class Person : IPerson
 {
@@ -7,10 +9,5 @@ internal class Person : IPerson
     public DateOnly Birthday { get; set; }
     public Gender Gender { get; set; }
 }
-internal enum Gender
-{
-    male,
-    female,
-    other
-}
+
 

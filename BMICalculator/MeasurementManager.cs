@@ -1,18 +1,20 @@
-﻿using BMICalculator.Models;
+﻿using BMICalculator.Interfaces;
+using BMICalculator.Models;
 
 namespace BMICalculator;
 
-internal class BMIManager
+internal class MeasurementManager
 {
-    internal static BMIManager bMI = new();
+    internal static MeasurementManager bMI = new();
 
-    internal static List<BMIMeasurement> bMIMeasurements = new List<BMIMeasurement> { };
-    internal static void AddToMeasurements(BMIMeasurement measurement)
+    internal static List<Measurement> bMIMeasurements = new List<Measurement> { };
+    internal static void AddToMeasurements(Measurement measurement)
     {
+        //check
         bMIMeasurements.Add(measurement);
     }
 
-    internal static double CalculateBMI(BMIMeasurement measurement)
+    internal static double CalculateBMI(Measurement measurement)
     {
         double height = measurement.Height;
 
@@ -39,9 +41,9 @@ internal class BMIManager
 
         Menu.Info("BMI-Calculator\n");
 
-        BMIMeasurement measurement = GetBMIMeasurement(GetPerson());
+        Measurement measurement = GetBMIMeasurement(GetPerson());
 
-        measurement.BMI = BMIManager.CalculateBMI(measurement);
+        measurement.BMI = MeasurementManager.CalculateBMI(measurement);
         measurement.Designation = GetDesignation(measurement.BMI);
         AddToMeasurements(measurement);
 
@@ -55,14 +57,11 @@ internal class BMIManager
         Person person = personManager.CreatePerson();
         return person;
     }
-    internal BMIMeasurement GetBMIMeasurement(Person person)
+    internal Measurement GetBMIMeasurement(Person person)
     {
-        BMIMeasurement measurement = new BMIMeasurement { };
+        Measurement measurement = new Measurement(person) { };
 
-        measurement.Lastname = person.Lastname;
-        measurement.Firstname = person.Firstname;
-        measurement.Gender = person.Gender;
-        measurement.Birthday = person.Birthday;
+        measurement.Person = person;
         measurement.Height = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your Height in Centimeters")));
         measurement.Weight = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your Weight in kilograms")));
         measurement.Date = DateTime.Now;

@@ -1,4 +1,5 @@
-﻿using BMICalculator.Models;
+﻿using BMICalculator.Interfaces;
+using BMICalculator.Models;
 
 namespace BMICalculator;
 
@@ -9,6 +10,8 @@ internal class PersonManager
     {
         persons.Add(person);
     }
+
+
 
     internal Person CreatePerson()
     {

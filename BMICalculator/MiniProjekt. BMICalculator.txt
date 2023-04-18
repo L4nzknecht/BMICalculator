@@ -28,3 +28,14 @@ Reflexion // Vorgehensweise, Erweiterungen
 
 5. Reflexion
 	Im weiteren wird eine Liste von Messungen vorher autogeneriert, um die Ausgabe testen zu können. Desweiteren sollen die checker automatisiert werden udn die nach bestimmten Eigenschaften gesucht/sortiert werden können.
+
+
+Anforderung
+
+1.	bodycheck
+2.	check, warning when mesurementcheck
+		Zeitpunkt, beim einfügen in die Liste
+
+Measurement
+	-boodpressure
+	-pulse
