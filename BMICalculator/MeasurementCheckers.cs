@@ -17,7 +17,7 @@ internal class MeasurementCheckers
         {
             CheckPulse(measurement);
         }
-        if (measurement.Bloodpressure.HasValue)
+        if (measurement.BloodpressureSYS.HasValue)
         {
             CheckBloodpressure(measurement);
         }

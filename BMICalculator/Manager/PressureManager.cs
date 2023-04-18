@@ -13,7 +13,7 @@ namespace BMICalculator.Manager
         {
             Console.Clear();
 
-            Menu.Info("Bloddpressure-Measurements\n");
+            Menu.Info("Bloodpressure-Measurements\n");
 
             measurement.BloodpressureSYS = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your SYS Pressure in mmHg")));
             measurement.BloodpressureDIA = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your DIA Pressure in mmHG")));

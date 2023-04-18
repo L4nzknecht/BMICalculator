@@ -38,6 +38,11 @@ namespace BMICalculator
                 measurement.BMI = BMIManager.CalculateBMI(measurement);
                 measurement.Designation = BMIManager.GetDesignation((double)measurement.BMI);
 
+                measurement.Pulse = 75 + (int)rnd.Next(-25, 30);
+
+                measurement.BloodpressureSYS = 100 + (int)rnd.Next(-30, 90);
+                measurement.BloodpressureDIA = 70 + (int)rnd.Next(-30, 30);
+
                 MeasurementManager.AddToMeasurements(measurement);
             }
         }
