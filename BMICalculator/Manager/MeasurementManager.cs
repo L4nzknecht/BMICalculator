@@ -1,6 +1,6 @@
 ﻿using BMICalculator.Interfaces;
 using BMICalculator.Models;
-using BMICalculator.Manager;
+using BMICalculator.Helpers;
 
 namespace BMICalculator.Manager;
 
@@ -58,17 +58,17 @@ internal class MeasurementManager
 
     private static Measurement GetBMI(Measurement measurement)
     {
-        measurement = BMIManager.CreateBMIMeasurement(measurement);
+        measurement = BMIHelper.CreateBMIMeasurement(measurement);
         return measurement;
     }
     private static Measurement GetPulse(Measurement measurement)
     {
-        measurement = PulseManager.CreatePulseMeasuement(measurement);
+        measurement = PulseHelper.CreatePulseMeasurement(measurement);
         return measurement;
     }
     private static Measurement GetPressure(Measurement measurement)
     {
-        measurement = PressureManager.CreatePressureMeasuement(measurement);
+        measurement = PressureHelper.CreatePressureMeasuement(measurement);
         return measurement;
     }
 

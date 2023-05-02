@@ -1,10 +1,10 @@
 ﻿using BMICalculator.Models;
 
-namespace BMICalculator.Manager;
+namespace BMICalculator.Helpers;
 
-internal class PulseManager
+internal static class PulseHelper
 {
-    internal static Measurement CreatePulseMeasuement(Measurement measurement)
+    internal static Measurement CreatePulseMeasurement(Measurement measurement)
     {
         Console.Clear();
 

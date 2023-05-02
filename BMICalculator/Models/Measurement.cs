@@ -11,8 +11,7 @@ internal class Measurement : IMeasurement
     public int Height { get; set; }
     public int Weight { get; set; }
 
-    public int? BloodpressureSYS { get; set; }
-    public int? BloodpressureDIA { get; set; }
+    public Bloodpressure Bloodpressure { get; set; }
 
     public int? Pulse { get; set; }
 
@@ -23,6 +22,11 @@ internal class Measurement : IMeasurement
     {
         Person = person;
     }
+    public Measurement() { }
 }
 
-
+internal class Bloodpressure
+{
+    public int? BloodpressureSYS { get; set; }
+    public int? BloodpressureDIA { get; set; }
+}

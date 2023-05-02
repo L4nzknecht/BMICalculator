@@ -1,6 +1,7 @@
 ﻿using BMICalculator.Interfaces;
 using BMICalculator.Manager;
 using BMICalculator.Models;
+using BMICalculator.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,13 +36,13 @@ namespace BMICalculator
                     Date = DateTime.Now.AddDays(rnd.Next(-180, 0))
                 };
                 measurement.Age = MeasurementManager.CalculateAge(measurement);
-                measurement.BMI = BMIManager.CalculateBMI(measurement);
-                measurement.Designation = BMIManager.GetDesignation((double)measurement.BMI);
+                measurement.BMI = BMIHelper.CalculateBMI(measurement);
+                measurement.Designation = BMIHelper.GetDesignation((double)measurement.BMI);
 
                 measurement.Pulse = 75 + (int)rnd.Next(-25, 30);
 
-                measurement.BloodpressureSYS = 100 + (int)rnd.Next(-30, 90);
-                measurement.BloodpressureDIA = 70 + (int)rnd.Next(-30, 30);
+                //measurement.Bloodpressure.BloodpressureSYS = 100 + (int)rnd.Next(-30, 90);
+                //measurement.Bloodpressure.BloodpressureDIA = 70 + (int)rnd.Next(-30, 30);
 
                 MeasurementManager.AddToMeasurements(measurement);
             }

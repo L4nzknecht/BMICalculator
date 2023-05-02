@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BMICalculator.Manager
+namespace BMICalculator.Helpers
 {
-    internal class PressureManager
+    internal static class PressureHelper
     {
         internal static Measurement CreatePressureMeasuement(Measurement measurement)
         {
@@ -15,8 +15,8 @@ namespace BMICalculator.Manager
 
             Menu.Info("Bloodpressure-Measurements\n");
 
-            measurement.BloodpressureSYS = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your SYS Pressure in mmHg")));
-            measurement.BloodpressureDIA = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your DIA Pressure in mmHG")));
+            measurement.Bloodpressure.BloodpressureSYS = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your SYS Pressure in mmHg")));
+            measurement.Bloodpressure.BloodpressureDIA = int.Parse(Menu.ValidateNumber(Menu.GetInput("Please enter your DIA Pressure in mmHG")));
 
             Menu.InfoWait("Please press any Key to return to Selection");
             Console.Clear();

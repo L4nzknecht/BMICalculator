@@ -17,15 +17,34 @@ internal class MeasurementCheckers
         {
             CheckPulse(measurement);
         }
-        if (measurement.BloodpressureSYS.HasValue)
-        {
-            CheckBloodpressure(measurement);
-        }
+        //if (measurement.Bloodpressure.HasValue)
+        //{
+        //    CheckBloodpressure(measurement);
+        //}
     }
 
     private static void CheckBloodpressure(Measurement measurement)
-    {
-        throw new NotImplementedException();
+    {   
+        if (measurement.Bloodpressure.BloodpressureSYS <= 130 && measurement.Bloodpressure.BloodpressureDIA <= 85)
+        {
+            return;
+        }
+        else if (measurement.Bloodpressure.BloodpressureSYS <= 139 && measurement.Bloodpressure.BloodpressureDIA <= 89)
+        {
+            WarningManager.Add(new Warning(measurement, "Bloodpressure too high, please check again", 0));
+        }
+        else if (measurement.Bloodpressure.BloodpressureSYS <= 159 && measurement.Bloodpressure.BloodpressureDIA <= 99)
+        {
+            WarningManager.Add(new Warning(measurement, "Bloodpressure too high, please check again", 1)); 
+        }
+        else if (measurement.Bloodpressure.BloodpressureSYS <= 179 && measurement.Bloodpressure.BloodpressureDIA <= 109)
+        {
+            WarningManager.Add(new Warning(measurement, "Bloodpressure too high, please check again", 2));
+        }
+        else if (measurement.Bloodpressure.BloodpressureSYS  > 179 && measurement.Bloodpressure.BloodpressureDIA > 109)
+        {
+            WarningManager.Add(new Warning(measurement, "Bloodpressure too high, please check again", 3));
+        }
     }
 
     private static void CheckPulse(Measurement measurement)

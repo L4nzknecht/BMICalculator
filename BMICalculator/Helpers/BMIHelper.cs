@@ -1,15 +1,21 @@
 ﻿using BMICalculator.Interfaces;
 using BMICalculator.Models;
 
-namespace BMICalculator.Manager
+namespace BMICalculator.Helpers
 {
-    internal class BMIManager
+    internal class BMIHelper
     {
         internal static double CalculateBMI(Measurement measurement)
         {
             double height = measurement.Height;
 
             double BMI = measurement.Weight / (height / 100 * height / 100);
+            BMI = Math.Round(BMI, 2);
+            return BMI;
+        }
+        internal static double CalculateBMI(int height, int weight)
+        {
+            double BMI = weight / (height / 100 * height / 100);
             BMI = Math.Round(BMI, 2);
             return BMI;
         }
@@ -35,8 +41,8 @@ namespace BMICalculator.Manager
 
             Console.Clear();
 
-            measurement.BMI = BMIManager.CalculateBMI(measurement);
-            measurement.Designation = BMIManager.GetDesignation((double)measurement.BMI);
+            measurement.BMI = CalculateBMI(measurement);
+            measurement.Designation = GetDesignation((double)measurement.BMI);
 
             Menu.OutputMeasurement(measurement);
             Menu.InfoWait("Please press any Key to return to Selection");
