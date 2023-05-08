@@ -22,7 +22,8 @@ internal class Program
             });
         foreach(Warning warning in WarningManager.listOfWarnings)
         {
-            Console.WriteLine(warning.measurement.Person.Firstname + " " + warning.Prio + " " + warning.Message);
+            Menu.OutputMeasurement(warning.measurement);
+            Console.WriteLine("   Warning:" + warning.Prio + " " + warning.Message);
         }
     }
 }
