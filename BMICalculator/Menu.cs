@@ -94,11 +94,12 @@ internal class Menu
         Console.WriteLine($"" +
             $"Date: {measurement.Date:dd/MM/yyyy} - " +
             $"Name: {measurement.Person.Lastname}, {measurement.Person.Firstname} - " +
-            $"Age: {measurement.Age} - " +
-            $"Height: {measurement.Height} cm - " +
-            $"Weigt: {measurement.Weight} kg - " +
-            $"BMI: {measurement.BMI} - " +
-            $"Designation: {measurement.Designation}");
+            $"Age: {measurement.Age} - "/* +*/
+            //$"Height: {measurement.Height} cm - " +
+            //$"Weigt: {measurement.Weight} kg - " +
+            //$"BMI: {measurement.BMI} - " +
+            //$"Designation: {measurement.Designation}"
+            )            ;
     }
     internal static void Info(string message)
     {

@@ -1,4 +1,5 @@
 ﻿using BMICalculator.Helpers;
+using BMICalculator.Interfaces;
 using BMICalculator.Manager;
 using BMICalculator.Models;
 using System.Diagnostics.Metrics;
@@ -20,10 +21,11 @@ internal class Program
                 BMI = BMIHelper.CalculateBMI(180, 100),
                 Designation = BMIHelper.GetDesignation(BMIHelper.CalculateBMI(180, 100))
             });
-        foreach(Warning warning in WarningManager.listOfWarnings)
+        var LoM = WarningManager.listOfWarnings.OrderByDescending(x => x.Prio);
+        foreach (Warning warning in LoM)
         {
             Menu.OutputMeasurement(warning.measurement);
-            Console.WriteLine("   Warning:" + warning.Prio + " " + warning.Message);
+            Console.WriteLine("   Warning:  Priority:" + warning.Prio + " " + warning.Message);
         }
     }
 }
